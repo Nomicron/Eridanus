@@ -3,3 +3,10 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.999985, 0, 0, 0, 0.999985, 0, 0, 0, 0.999985, 0, -0.497803, 0)
+size = Vector3(100, 0.001, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CSGBox3D2"]
+transform = Transform3D(0.990506, 0, 0, 0, 0.931067, 0.337961, 0, -0.337961, 0.931067, 0, 2.22114, 14.0304)

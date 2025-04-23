@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5lwl83q83vrk"]
 
-[ext_resource type="Script" uid="uid://buqiyh7mexypd" path="res://Scenes/CharacterBody3d.cs" id="1_nwp2y"]
+[ext_resource type="Script" uid="uid://buqiyh7mexypd" path="res://Script/EdwardTesting/CharacterBody3d.cs" id="1_l53qc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t3bbu"]
 
@@ -10,7 +10,7 @@
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 physics_interpolation_mode = 1
-script = ExtResource("1_nwp2y")
+script = ExtResource("1_l53qc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("BoxShape3D_t3bbu")

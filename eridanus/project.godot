@@ -11,14 +11,9 @@ config_version=5
 [application]
 
 config/name="Eridanus"
-run/main_scene="uid://cia7kjbpgpwbn"
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Asset/icon.svg"
 
 [dotnet]
 
 project/assembly_name="Eridanus"
-
-[editor]
-
-script/search_in_file_extensions=PackedStringArray("cs", "gd", "gdshader")

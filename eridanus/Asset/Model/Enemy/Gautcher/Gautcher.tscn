@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://defeys4rhg05u"]
+
+[ext_resource type="PackedScene" uid="uid://devx4hjgw5g6i" path="res://Asset/Model/Enemy/Gautcher/Gautcher.fbx" id="1_6h4p3"]
+[ext_resource type="Material" uid="uid://c72h4fgc2f8l5" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tres" id="2_db46g"]
+
+[node name="Gautcher" instance=ExtResource("1_6h4p3")]
+
+[node name="Gautcher" parent="." index="0"]
+material_override = ExtResource("2_db46g")

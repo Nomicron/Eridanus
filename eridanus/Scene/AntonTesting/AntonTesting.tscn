@@ -13,4 +13,4 @@ transform = Transform3D(-13.8271, 0, 0, 0, 0.0665016, 0, 0, 0, -13.8271, 0, 0, 0
 use_collision = true
 
 [node name="Player" parent="." instance=ExtResource("2_lcfg3")]
-transform = Transform3D(0.71934, 0, -0.694658, 0, 1, 0, 0.694658, 0, 0.71934, -3.09977, 0.95902, 3.17761)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53621, 0.95902, -2.80993)

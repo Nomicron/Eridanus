@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bva85rglsprgq"]
+[gd_scene load_steps=3 format=3 uid="uid://bva85rglsprgq"]
 
 [ext_resource type="PackedScene" uid="uid://defeys4rhg05u" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tscn" id="1_t5md6"]
+[ext_resource type="PackedScene" uid="uid://b3j0x63o7h3w" path="res://Asset/Prefab/Player.tscn" id="2_lcfg3"]
 
 [node name="AntonTesting" type="Node3D"]
 
 [node name="Gautcher" parent="." instance=ExtResource("1_t5md6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28841, 0)
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(0.695875, -0.191824, 0.69207, 6.32033e-09, 0.963668, 0.267104, -0.718163, -0.185871, 0.670593, 1.09665, 0.435918, 1.04527)
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(-13.8271, 0, 0, 0, 0.0665016, 0, 0, 0, -13.8271, 0, 0, 0)
+use_collision = true
+
+[node name="Player" parent="." instance=ExtResource("2_lcfg3")]
+transform = Transform3D(0.71934, 0, -0.694658, 0, 1, 0, 0.694658, 0, 0.71934, -3.09977, 0.95902, 3.17761)

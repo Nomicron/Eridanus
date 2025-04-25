@@ -8,9 +8,9 @@ public partial class Movement : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		var direction = Vector3.Zero;
-		if (Input.IsActionPressed("move_left"))
+		if (Input.IsActionPressed("MoveLeft"))
 			direction.X -= 1.0f;
-		if (Input.IsActionPressed("move_right"))
+		if (Input.IsActionPressed("MoveRight"))
 			direction.X += 1.0f;
 
 		// Ground velocity

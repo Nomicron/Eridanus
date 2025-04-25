@@ -16,7 +16,7 @@ public partial class PlayerMove : Node
 
 	private float currentSpeedModifiers;
 
-	//Update synced with physics
+	// Update synced with physics
 	public override void _PhysicsProcess(double delta)
 	{
 		ResetVariables();
@@ -36,7 +36,7 @@ public partial class PlayerMove : Node
 		player.MoveAndSlide();
 	}
 
-	//Resets variables to default values each frame synced with physics
+	// Resets variables to default values each frame synced with physics
 	private void ResetVariables()
 	{
 		velocity = player.Velocity;
@@ -46,7 +46,7 @@ public partial class PlayerMove : Node
 		currentSpeedModifiers = 1.0f;
 	}
 
-	//Get movement direction from input
+	// Get movement direction from input
 	private void UpdateMoveInput()
 	{
 		if (Input.IsActionPressed("MoveAhead"))
@@ -81,7 +81,7 @@ public partial class PlayerMove : Node
 			moveInput = moveInput.Normalized();
 	}
 
-	//Apply gravity to character
+	// Apply gravity to character
 	private void ApplyGravity(double delta)
 	{
 		if (!player.IsOnFloor())
@@ -90,7 +90,7 @@ public partial class PlayerMove : Node
 		}
 	}
 
-	//Apply jump force when action is activated 
+	// Apply jump force when action is activated 
 	private void ApplyJump()
 	{
 		if (Input.IsActionJustPressed("Jump") && player.IsOnFloor())
@@ -99,7 +99,7 @@ public partial class PlayerMove : Node
 		}
 	}
 
-	//Apply sprint speed when action is activated
+	// Apply sprint speed when action is activated
 	private void ApplySprint()
 	{
 		if (Input.IsActionPressed("Sprint") && player.IsOnFloor() && moveInput.Y < 0 && !Input.IsActionPressed("Crouch"))
@@ -110,7 +110,7 @@ public partial class PlayerMove : Node
 		}
 	}
 
-	//Apply crouch speed and hitbox when action is activated
+	// Apply crouch speed and hitbox when action is activated
 	private void ApplyCrouch()
 	{
 		if (Input.IsActionPressed("Crouch") && player.IsOnFloor() && !Input.IsActionPressed("Sprint"))
@@ -121,7 +121,7 @@ public partial class PlayerMove : Node
 		}
 	}
 
-	//Calculate and apply velocity to character
+	// Calculate and apply velocity to character
 	private void CalculateVelocity()
 	{
 		Vector3 forwardMove = Vector3.Forward * moveInput.Y * (moveInput.Y >= 0 ? aheadSpeed : backSpeed) * currentSpeedModifiers;

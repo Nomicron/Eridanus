@@ -14,3 +14,11 @@ use_collision = true
 
 [node name="Player" parent="." instance=ExtResource("2_lcfg3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53621, 0.95902, -2.80993)
+
+[node name="Slope" type="CSGBox3D" parent="."]
+transform = Transform3D(3.6585, -0.460479, 0, 1.89784, 0.887671, 0, 0, 0, 1, 0, 0.534626, -4.35758)
+use_collision = true
+
+[node name="Slope2" type="CSGBox3D" parent="."]
+transform = Transform3D(3.02838, -0.678301, 0, 2.79559, 0.734784, 0, 0, 0, 1, -0.270483, 1.04355, -6.30948)
+use_collision = true

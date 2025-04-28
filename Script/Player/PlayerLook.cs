@@ -11,13 +11,13 @@ public partial class PlayerLook : Node
 
     private Vector2 lookInput;
 
-    // Is called when node has entered scene
+    // Called when node has entered scene
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
-    // Is called when an input is recognized inside the program
+    // Called when an input is recognized inside the program
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion eventMouseMotion)

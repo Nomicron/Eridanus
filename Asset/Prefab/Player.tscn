@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3j0x63o7h3w"]
+[gd_scene load_steps=4 format=3 uid="uid://b3j0x63o7h3w"]
 
 [ext_resource type="Script" uid="uid://c604gb784e6cr" path="res://Script/Player/PlayerMove.cs" id="1_se12x"]
 [ext_resource type="Script" uid="uid://6ome3nalpvqk" path="res://Script/Player/PlayerLook.cs" id="3_hcf0b"]
@@ -7,33 +7,25 @@
 radius = 0.26
 height = 1.8504
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6odwx"]
-radius = 0.26
-height = 1.01342
-
 [node name="Player" type="CharacterBody3D"]
 
-[node name="StandCollider" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_x3kyq")
 debug_color = Color(0, 0.588235, 0.756863, 1)
 
-[node name="CrouchCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.41909, 0)
-shape = SubResource("CapsuleShape3D_6odwx")
-disabled = true
-debug_color = Color(0, 0.588235, 0.756863, 1)
-
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768159, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.768, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Script" type="Node" parent="."]
 
-[node name="Move" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+[node name="Move" type="Node" parent="Script" node_paths=PackedStringArray("player", "collider", "head")]
 script = ExtResource("1_se12x")
 player = NodePath("../..")
+collider = NodePath("../../Collider")
+head = NodePath("../../Head")
 
 [node name="Look" type="Node" parent="Script" node_paths=PackedStringArray("player", "head")]
 script = ExtResource("3_hcf0b")

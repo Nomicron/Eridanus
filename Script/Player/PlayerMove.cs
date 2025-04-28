@@ -4,17 +4,34 @@ using System;
 public partial class PlayerMove : Node
 {
 	[Export] private CharacterBody3D player;
+	[Export] private CollisionShape3D collider;
+	[Export] private Node3D head;
 	[Export] private float aheadSpeed = 3.25f;
 	[Export] private float backSpeed = 2.75f;
 	[Export] private float strafeSpeed = 2.5f;
-	[Export] private float sprintModifier = 1.5f;
-	[Export] private float crouchModifier = 0.5f;
-	[Export] private float jumpVelocity = 4.0f;
+	[Export] private float sprintSpeedModifier = 1.5f;
+	[Export] private float crouchSpeedModifier = 0.5f;
+	[Export] private float jumpSpeed = 4.0f;
+
+	[Export] private float crouchHeight = 1f;
+	[Export] private float standHeight = 1.85f;
+	[Export] private float crouchColliderCenterY = -0.425f;
+	[Export] private float standColliderCenterY = 0;
+	[Export] private float standHeadHeight = 0.768f;
+	[Export] private float crouchHeadHeight = -0.082f;
 
 	private Vector3 velocity;
 	private Vector2 moveInput;
 
-	private float currentSpeedModifiers;
+	CapsuleShape3D capsule;
+
+	private float currentSpeedModifier;
+
+	// Called when node has entered the scene first time
+	public override void _Ready()
+	{
+		capsule = collider.Shape as CapsuleShape3D;
+	}
 
 	// Update synced with physics
 	public override void _PhysicsProcess(double delta)
@@ -43,7 +60,7 @@ public partial class PlayerMove : Node
 
 		moveInput = Vector2.Zero;
 
-		currentSpeedModifiers = 1.0f;
+		currentSpeedModifier = 1.0f;
 	}
 
 	// Get movement direction from input
@@ -93,9 +110,11 @@ public partial class PlayerMove : Node
 	// Apply jump force when action is activated 
 	private void ApplyJump()
 	{
-		if (Input.IsActionJustPressed("Jump") && player.IsOnFloor())
+		if (Input.IsActionJustPressed("Jump") && player.IsOnFloor() && !Input.IsActionPressed("Crouch"))
 		{
-			velocity.Y = jumpVelocity;
+			velocity.Y = jumpSpeed;
+
+			GD.Print("Jump");
 		}
 	}
 
@@ -104,7 +123,7 @@ public partial class PlayerMove : Node
 	{
 		if (Input.IsActionPressed("Sprint") && player.IsOnFloor() && moveInput.Y < 0 && !Input.IsActionPressed("Crouch"))
 		{
-			currentSpeedModifiers *= sprintModifier;
+			currentSpeedModifier *= sprintSpeedModifier;
 
 			GD.Print("Sprint");
 		}
@@ -113,19 +132,38 @@ public partial class PlayerMove : Node
 	// Apply crouch speed and hitbox when action is activated
 	private void ApplyCrouch()
 	{
-		if (Input.IsActionPressed("Crouch") && player.IsOnFloor() && !Input.IsActionPressed("Sprint"))
-		{
-			currentSpeedModifiers *= crouchModifier;
+		CapsuleShape3D capsule = collider.Shape as CapsuleShape3D;
 
-			GD.Print("Crouch");
+		if (Input.IsActionPressed("Crouch") && player.IsOnFloor())
+		{
+			currentSpeedModifier *= crouchSpeedModifier;
+
+			if (capsule.Height != crouchHeight)
+			{
+				head.Position = new Vector3(head.Position.X, crouchHeadHeight, head.Position.Z);
+
+				capsule.Height = crouchHeight;
+				collider.Position = new Vector3(0, crouchColliderCenterY, 0);
+
+				GD.Print("Crouch");
+			}
+		}
+		else if (capsule.Height == crouchHeight)
+		{
+			head.Position = new Vector3(head.Position.X, standHeadHeight, head.Position.Z);
+
+			capsule.Height = standHeight;
+			collider.Position = new Vector3(0, standColliderCenterY, 0);
+
+			GD.Print("Stand");
 		}
 	}
 
 	// Calculate and apply velocity to character
 	private void CalculateVelocity()
 	{
-		Vector3 forwardMove = Vector3.Forward * moveInput.Y * (moveInput.Y >= 0 ? aheadSpeed : backSpeed) * currentSpeedModifiers;
-		Vector3 strafeMove = Vector3.Right * moveInput.X * strafeSpeed * currentSpeedModifiers;
+		Vector3 forwardMove = Vector3.Forward * moveInput.Y * (moveInput.Y >= 0 ? aheadSpeed : backSpeed) * currentSpeedModifier;
+		Vector3 strafeMove = Vector3.Right * moveInput.X * strafeSpeed * currentSpeedModifier;
 
 		Vector3 localMove = forwardMove + strafeMove;
 

@@ -1,24 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5lwl83q83vrk"]
 
-[ext_resource type="Script" uid="uid://buqiyh7mexypd" path="res://Script/EdwardTesting/Movement.cs" id="1_l53qc"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_t3bbu"]
+[ext_resource type="PackedScene" uid="uid://b3j0x63o7h3w" path="res://Asset/Prefab/Player.tscn" id="1_sy3pq"]
+[ext_resource type="PackedScene" uid="uid://defeys4rhg05u" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tscn" id="2_sy3pq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nwp2y"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Player" type="CharacterBody3D" parent="."]
-physics_interpolation_mode = 1
-script = ExtResource("1_l53qc")
-
-[node name="Collider" type="CollisionShape3D" parent="Player"]
-shape = SubResource("BoxShape3D_t3bbu")
-
-[node name="Mesh" type="CSGBox3D" parent="Player/Collider"]
-
-[node name="Camera" type="Camera3D" parent="Player"]
-transform = Transform3D(0.0238716, 0.413025, -0.910407, -0.0108261, 0.91072, 0.412883, 0.999656, 0, 0.0262118, -1.70106, 1.31099, 0)
+[node name="Player" parent="." instance=ExtResource("1_sy3pq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00989, 0.431199, -1.79669)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -29,3 +19,11 @@ shape = SubResource("BoxShape3D_nwp2y")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13413, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(27.0042, 0, 0, 0, 0.100003, 0, 0, 0, 19.0037, -0.0223339, -0.839229, 0.00557959)
+use_collision = true
+
+[node name="Gautcher" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("2_sy3pq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96091, 0.108045, -1.82784)
+Player = NodePath("../Player")

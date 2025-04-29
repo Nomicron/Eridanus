@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://defeys4rhg05u"]
+[gd_scene load_steps=5 format=3 uid="uid://defeys4rhg05u"]
 
 [ext_resource type="PackedScene" uid="uid://devx4hjgw5g6i" path="res://Asset/Model/Enemy/Gautcher/Gautcher.fbx" id="1_6h4p3"]
+[ext_resource type="Script" uid="uid://c87c1ymrkjdwu" path="res://Script/Gautcher/GautcherRoot.cs" id="2_1qyke"]
 [ext_resource type="Material" uid="uid://c72h4fgc2f8l5" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tres" id="2_db46g"]
+[ext_resource type="Script" uid="uid://5rbi8hq8cc1v" path="res://Script/Gautcher/LookAtPlayer.cs" id="3_mqsua"]
 
 [node name="Gautcher" instance=ExtResource("1_6h4p3")]
+script = ExtResource("2_1qyke")
 
 [node name="Gautcher" parent="." index="0"]
 material_override = ExtResource("2_db46g")
+
+[node name="Script" type="Node" parent="." index="1"]
+
+[node name="LookAtPlayer" type="Node" parent="Script" index="0" node_paths=PackedStringArray("Gautcher", "Root")]
+script = ExtResource("3_mqsua")
+Gautcher = NodePath("../..")
+Root = NodePath("../..")
+
+[node name="FollowPlayer" type="Node" parent="Script" index="1"]

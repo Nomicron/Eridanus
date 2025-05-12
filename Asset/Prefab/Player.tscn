@@ -27,7 +27,8 @@ player = NodePath("../..")
 collider = NodePath("../../Collider")
 head = NodePath("../../Head")
 
-[node name="Look" type="Node" parent="Script" node_paths=PackedStringArray("player", "head")]
+[node name="Look" type="Node" parent="Script" node_paths=PackedStringArray("player", "head", "camera")]
 script = ExtResource("3_hcf0b")
 player = NodePath("../..")
 head = NodePath("../../Head")
+camera = NodePath("../../Head/Camera3D")

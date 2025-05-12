@@ -5,9 +5,12 @@ public partial class PlayerLook : Node
 {
     [Export] private CharacterBody3D player;
     [Export] private Node3D head;
+    [Export] private Camera3D camera;
     [Export] private float mouseSensitivity = 0.1f;
     [Export] private float minXRotation = -45;
     [Export] private float maxXRotation = 50;
+    [Export] private float defaultFOV = 75;
+    [Export] private float zoomFOV = 55;
 
     private Vector2 lookInput;
 
@@ -25,6 +28,15 @@ public partial class PlayerLook : Node
             player.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.X * mouseSensitivity));
             head.RotateX(Mathf.DegToRad(eventMouseMotion.Relative.Y * mouseSensitivity));
             head.Rotation = Mathf.Clamp(head.Rotation.X, Mathf.DegToRad(minXRotation), Mathf.DegToRad(maxXRotation)) * Vector3.Right;
+        }
+
+        if (Input.IsActionPressed("Zoom"))
+        {
+            camera.Fov = zoomFOV;
+        }
+        else if (Input.IsActionJustReleased("Zoom"))
+        {
+            camera.Fov = defaultFOV;
         }
     }
 

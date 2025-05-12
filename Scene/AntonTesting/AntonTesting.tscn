@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://bva85rglsprgq"]
 
-[ext_resource type="PackedScene" uid="uid://defeys4rhg05u" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tscn" id="1_t5md6"]
+[ext_resource type="PackedScene" uid="uid://di42y5e5j3wt1" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tscn" id="1_t5md6"]
 [ext_resource type="PackedScene" uid="uid://b3j0x63o7h3w" path="res://Asset/Prefab/Player.tscn" id="2_lcfg3"]
 
 [node name="AntonTesting" type="Node3D"]
 
-[node name="Gautcher" parent="." instance=ExtResource("1_t5md6")]
+[node name="Gautcher" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_t5md6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28841, 0)
+player = NodePath("../Player")
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(-13.8271, 0, 0, 0, 0.0665016, 0, 0, 0, -13.8271, 0, 0, 0)
 use_collision = true
+size = Vector3(2, 0.89, 2)
 
 [node name="Ceiling" type="CSGBox3D" parent="."]
 transform = Transform3D(-3.29099, 0, 0, 0, 0.0738666, 0, 0, 0, -5.82061, 5.41304, 1.1545, -3.84234)
@@ -26,3 +28,8 @@ use_collision = true
 [node name="Slope2" type="CSGBox3D" parent="."]
 transform = Transform3D(3.02838, -0.678301, 0, 2.79559, 0.734784, 0, 0, 0, 1, -0.270483, 1.04355, -6.30948)
 use_collision = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.89815, 0.285526, 0.334367, -0.439688, 0.583242, 0.68301, 0, -0.760463, 0.649382, 0, 2.5226, 0)
+shadow_enabled = true
+sky_mode = 1

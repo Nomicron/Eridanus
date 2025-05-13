@@ -15,8 +15,26 @@ public partial class GautcherRoot : CharacterBody3D
     {
         if (player.Position.DistanceTo(GlobalPosition) < 5)
         {
-            followPlayer.ChasePlayer();
-            lookPlayer.LookPlayer();
+            state = GautcherState.Chase;
+        }
+        else
+        {
+            state = GautcherState.Idle;
+        }
+
+        UpdateState();
+    }
+
+    private void UpdateState()
+    {
+        switch (state)
+        {
+            case GautcherState.Idle:
+                break;
+            case GautcherState.Chase:
+                followPlayer.ChasePlayer();
+                lookPlayer.LookPlayer();
+                break;
         }
     }
 }

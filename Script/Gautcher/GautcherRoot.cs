@@ -4,36 +4,42 @@ using System;
 public partial class GautcherRoot : CharacterBody3D
 {
     [Export] internal CharacterBody3D player;
-    [Export] private FollowPlayer followPlayer;
-    [Export] private LookAtPlayer lookPlayer;
+    [Export] private GautcherMove move;
+    [Export] private GautcherLook look;
+    [Export] private float spotDistance;
 
-    private enum GautcherState { Idle, Chase }
+    private enum GautcherState { Patrol, Chase }
 
-    private GautcherState state = GautcherState.Idle;
+    private GautcherState state = GautcherState.Patrol;
 
     public override void _PhysicsProcess(double delta)
     {
-        if (player.Position.DistanceTo(GlobalPosition) < 5)
+        ChangeState();
+        UpdateState(delta);
+    }
+
+    private void ChangeState()
+    {
+        if (player.Position.DistanceTo(GlobalPosition) <= spotDistance)
         {
             state = GautcherState.Chase;
         }
         else
         {
-            state = GautcherState.Idle;
+            state = GautcherState.Patrol;
         }
-
-        UpdateState();
     }
 
-    private void UpdateState()
+    private void UpdateState(double delta)
     {
         switch (state)
         {
-            case GautcherState.Idle:
+            case GautcherState.Patrol:
+                move.Patrol(delta);
                 break;
             case GautcherState.Chase:
-                followPlayer.ChasePlayer();
-                lookPlayer.LookPlayer();
+                move.ChasePlayer();
+                look.LookPlayer();
                 break;
         }
     }

@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://di42y5e5j3wt1"]
+[gd_scene load_steps=9 format=4 uid="uid://di42y5e5j3wt1"]
 
 [ext_resource type="Script" uid="uid://c87c1ymrkjdwu" path="res://Script/Gautcher/GautcherRoot.cs" id="2_1qyke"]
 [ext_resource type="Material" uid="uid://c72h4fgc2f8l5" path="res://Asset/Model/Enemy/Gautcher/Gautcher.tres" id="2_db46g"]
-[ext_resource type="Script" uid="uid://5rbi8hq8cc1v" path="res://Script/Gautcher/LookAtPlayer.cs" id="3_mqsua"]
-[ext_resource type="Script" uid="uid://dlvsup6vt8jho" path="res://Script/Gautcher/FollowPlayer.cs" id="4_1qyke"]
+[ext_resource type="Script" uid="uid://x3lwot65wan0" path="res://Script/Gautcher/GautcherLook.cs" id="3_1qyke"]
+[ext_resource type="Script" uid="uid://wbrcjxpc4mcm" path="res://Script/Gautcher/GautcherMove.cs" id="4_26yas"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imkmi"]
 
@@ -39,10 +39,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cy3m5")
 
-[node name="Gautcher" type="CharacterBody3D" node_paths=PackedStringArray("followPlayer", "lookPlayer")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1qyke"]
+radius = 0.5355
+
+[node name="Gautcher" type="CharacterBody3D" node_paths=PackedStringArray("move", "look")]
 script = ExtResource("2_1qyke")
-followPlayer = NodePath("Script/FollowPlayer")
-lookPlayer = NodePath("Script/LookAtPlayer")
+move = NodePath("Script/Move")
+look = NodePath("Script/Look")
 
 [node name="Gautcher" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
@@ -52,12 +55,16 @@ skeleton = NodePath("")
 
 [node name="Script" type="Node" parent="."]
 
-[node name="LookAtPlayer" type="Node" parent="Script" node_paths=PackedStringArray("gautcher", "root")]
-script = ExtResource("3_mqsua")
+[node name="Look" type="Node" parent="Script" node_paths=PackedStringArray("gautcher", "root")]
+script = ExtResource("3_1qyke")
 gautcher = NodePath("../..")
 root = NodePath("../..")
 
-[node name="FollowPlayer" type="Node" parent="Script" node_paths=PackedStringArray("gautcher", "root")]
-script = ExtResource("4_1qyke")
+[node name="Move" type="Node" parent="Script" node_paths=PackedStringArray("gautcher", "root")]
+script = ExtResource("4_26yas")
 gautcher = NodePath("../..")
 root = NodePath("../..")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0157366, 0.0545315)
+shape = SubResource("SphereShape3D_1qyke")

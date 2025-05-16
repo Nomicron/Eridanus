@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-public partial class LookAtPlayer : Node
+public partial class GautcherLook : Node
 {
     [Export] private Node3D gautcher;
     [Export] private GautcherRoot root;

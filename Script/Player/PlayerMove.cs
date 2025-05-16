@@ -162,10 +162,10 @@ public partial class PlayerMove : Node
 	// Calculate and apply velocity to character
 	private void CalculateVelocity()
 	{
-		Vector3 forwardMove = Vector3.Forward * moveInput.Y * (moveInput.Y >= 0 ? aheadSpeed : backSpeed) * currentSpeedModifier;
+		Vector3 aheadMove = Vector3.Forward * moveInput.Y * (moveInput.Y <= 0 ? aheadSpeed : backSpeed) * currentSpeedModifier;
 		Vector3 strafeMove = Vector3.Right * moveInput.X * strafeSpeed * currentSpeedModifier;
 
-		Vector3 localMove = forwardMove + strafeMove;
+		Vector3 localMove = aheadMove + strafeMove;
 
 		Vector3 globalMove = player.Transform.Basis * localMove;
 

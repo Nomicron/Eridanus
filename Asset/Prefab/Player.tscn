@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3j0x63o7h3w"]
+[gd_scene load_steps=6 format=3 uid="uid://b3j0x63o7h3w"]
 
+[ext_resource type="Script" uid="uid://byi563dnv0wbt" path="res://Script/Player/PlayerRoot.cs" id="1_j32r5"]
 [ext_resource type="Script" uid="uid://c604gb784e6cr" path="res://Script/Player/PlayerMove.cs" id="1_se12x"]
 [ext_resource type="Script" uid="uid://6ome3nalpvqk" path="res://Script/Player/PlayerLook.cs" id="3_hcf0b"]
+[ext_resource type="Script" uid="uid://btrrnioidor8k" path="res://Script/Player/PlayerStamina.cs" id="3_j32r5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3kyq"]
 radius = 0.26
 height = 1.8504
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("staminaScript")]
+script = ExtResource("1_j32r5")
+staminaScript = NodePath("Script/Stamina")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_x3kyq")
@@ -21,10 +25,11 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Script" type="Node" parent="."]
 
-[node name="Move" type="Node" parent="Script" node_paths=PackedStringArray("player", "collider", "head")]
+[node name="Move" type="Node" parent="Script" node_paths=PackedStringArray("player", "collider", "playerScript", "head")]
 script = ExtResource("1_se12x")
 player = NodePath("../..")
 collider = NodePath("../../Collider")
+playerScript = NodePath("../..")
 head = NodePath("../../Head")
 
 [node name="Look" type="Node" parent="Script" node_paths=PackedStringArray("player", "head", "camera")]
@@ -32,3 +37,6 @@ script = ExtResource("3_hcf0b")
 player = NodePath("../..")
 head = NodePath("../../Head")
 camera = NodePath("../../Head/Camera3D")
+
+[node name="Stamina" type="Node" parent="Script"]
+script = ExtResource("3_j32r5")

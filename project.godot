@@ -131,9 +131,15 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/size.mobile=4096
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/directional_shadow/16_bits=false
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
 shading/overrides/force_vertex_shading=true
 shading/overrides/force_lambert_over_burley=true
-lights_and_shadows/positional_shadow/atlas_size=2048
+textures/default_filters/anisotropic_filtering_level=4
+anti_aliasing/quality/msaa_3d=3
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+textures/decals/filter=0
+textures/light_projectors/filter=0
+lights_and_shadows/positional_shadow/atlas_size.mobile=4096

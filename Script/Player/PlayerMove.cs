@@ -5,6 +5,7 @@ public partial class PlayerMove : Node
 {
 	[Export] private CharacterBody3D player;
 	[Export] private CollisionShape3D collider;
+	[Export] private PlayerRoot playerScript;
 	[Export] private Node3D head;
 	[Export] private float aheadSpeed = 3.25f;
 	[Export] private float backSpeed = 2.75f;
@@ -110,8 +111,10 @@ public partial class PlayerMove : Node
 	// Apply jump force when action is activated 
 	private void ApplyJump()
 	{
-		if (Input.IsActionJustPressed("Jump") && player.IsOnFloor() && !Input.IsActionPressed("Crouch"))
+		if (Input.IsActionJustPressed("Jump") && player.IsOnFloor() && !Input.IsActionPressed("Crouch") && playerScript.staminaScript.CanJump())
 		{
+			playerScript.staminaScript.Jump();
+
 			velocity.Y = jumpSpeed;
 
 			GD.Print("Jump");
@@ -121,8 +124,10 @@ public partial class PlayerMove : Node
 	// Apply sprint speed when action is activated
 	private void ApplySprint()
 	{
-		if (Input.IsActionPressed("Sprint") && player.IsOnFloor() && moveInput.Y < 0 && !Input.IsActionPressed("Crouch"))
+		if (Input.IsActionPressed("Sprint") && player.IsOnFloor() && moveInput.Y < 0 && !Input.IsActionPressed("Crouch") && playerScript.staminaScript.CanSprint())
 		{
+			playerScript.staminaScript.Sprint();
+
 			currentSpeedModifier *= sprintSpeedModifier;
 
 			GD.Print("Sprint");

@@ -8,13 +8,14 @@
 
 [node name="Script" type="Node" parent="."]
 
-[node name="Screen" type="Node" parent="Script"]
+[node name="Screen" type="Node" parent="Script" node_paths=PackedStringArray("gautcher", "scene")]
 script = ExtResource("3_qltr2")
+gautcher = NodePath("../../Gautcher")
+scene = NodePath("../..")
 
 [node name="Gautcher" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_jfw7m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.31157, 1.28841, 9.24683)
 player = NodePath("../Player")
-spotDistance = 10.0
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(-13.8271, 0, 0, 0, 0.0665016, 0, 0, 0, -13.8271, 0, 0, 0)

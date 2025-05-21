@@ -46,6 +46,7 @@ radius = 0.5355
 script = ExtResource("2_1qyke")
 move = NodePath("Script/Move")
 look = NodePath("Script/Look")
+spotDistance = 10.0
 
 [node name="Gautcher" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)

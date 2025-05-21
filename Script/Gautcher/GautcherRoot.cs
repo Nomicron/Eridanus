@@ -3,7 +3,7 @@ using System;
 
 public partial class GautcherRoot : CharacterBody3D
 {
-    [Export] internal CharacterBody3D player;
+    [Export] public CharacterBody3D player;
     [Export] private GautcherMove move;
     [Export] private GautcherLook look;
     [Export] private float spotDistance;
@@ -20,7 +20,11 @@ public partial class GautcherRoot : CharacterBody3D
 
     private void ChangeState()
     {
-        if (player.Position.DistanceTo(GlobalPosition) <= spotDistance)
+        if (player.Position.DistanceTo(GlobalPosition) <= 1)
+        {
+            GetTree().ReloadCurrentScene();
+        }
+        else if (player.Position.DistanceTo(GlobalPosition) <= spotDistance)
         {
             state = GautcherState.Chase;
         }

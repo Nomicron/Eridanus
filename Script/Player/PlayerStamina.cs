@@ -4,12 +4,16 @@ using System;
 public partial class PlayerStamina : Node
 {
     [Export] public float Stamina { get; private set; }
-    [Export] private float staminaMax = 100;
-    [Export] private float sprintDepletion = 0.50f;
-    [Export] private float jumpDepletion = 10f;
-    [Export] private float staminaReplenishment = 0.1f;
+    [Export] private float staminaMax = 100.0f;
+    [Export] private float sprintDepletion = 0.175f;
+    [Export] private float jumpDepletion = 25.0f;
+    [Export] private float staminaReplenishment = 7.5f;
+    [Export] private TextureRect vignette;
 
+    private bool cooldown;
     private float oldStamina;
+    private float cooldownTimer;
+    private float cooldownDur = 6.5f;
 
     public override void _Ready()
     {
@@ -18,54 +22,81 @@ public partial class PlayerStamina : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        if (oldStamina == Stamina && Stamina < staminaMax)
+        if (!cooldown)
         {
-            if (Stamina + staminaReplenishment > staminaMax)
+            if (oldStamina == Stamina && Stamina < staminaMax)
             {
-                Stamina = 100;
+                Stamina += staminaReplenishment * (float)delta;
+
+                GD.Print(Stamina);
             }
-            else
-            {
-                Stamina += staminaReplenishment;
-            }
-            
-            GD.Print(Stamina);
         }
 
         oldStamina = Stamina;
+
+        if (Stamina <= 1.5f)
+        {
+            cooldown = true;
+        }
+
+        if (cooldown && cooldownTimer < cooldownDur)
+        {
+            cooldownTimer += (float)delta;
+        }
+        else if (cooldown && cooldownTimer >= cooldownDur)
+        {
+            cooldown = false;
+            cooldownTimer = 0;
+        }
+
+        vignette.SelfModulate = new Color(vignette.SelfModulate.R, vignette.SelfModulate.G, vignette.SelfModulate.B, 1 - Stamina / 100);
     }
 
     public bool CanSprint()
     {
-        float check = Stamina;
-        check -= sprintDepletion;
-
-        GD.Print(Stamina);
-
-        if (check < 0)
+        if (!cooldown)
         {
-            return false;
+            float check = Stamina;
+            check -= sprintDepletion;
+
+            GD.Print(Stamina);
+
+            if (check < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
-            return true;
+            return false;
         }
     }
 
     public bool CanJump()
     {
-        float check = Stamina;
-        check -= jumpDepletion;
-
-        GD.Print(Stamina);
-
-        if (check < 0)
+        if (!cooldown)
         {
-            return false;
+            float check = Stamina;
+            check -= jumpDepletion;
+
+            GD.Print(Stamina);
+
+            if (check < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
-            return true;
+            return false;
         }
     }
 

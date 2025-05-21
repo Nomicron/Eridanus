@@ -7,6 +7,7 @@ public partial class PlayerMove : Node
 	[Export] private CollisionShape3D collider;
 	[Export] private PlayerRoot playerScript;
 	[Export] private Node3D head;
+	[Export] private Camera3D camera;
 	[Export] private float aheadSpeed = 3.25f;
 	[Export] private float backSpeed = 2.75f;
 	[Export] private float strafeSpeed = 2.5f;
@@ -37,6 +38,8 @@ public partial class PlayerMove : Node
 	// Update synced with physics
 	public override void _PhysicsProcess(double delta)
 	{
+		camera.Fov = 75;
+
 		ResetVariables();
 
 		UpdateMoveInput();
@@ -127,6 +130,8 @@ public partial class PlayerMove : Node
 		if (Input.IsActionPressed("Sprint") && player.IsOnFloor() && moveInput.Y < 0 && !Input.IsActionPressed("Crouch") && playerScript.staminaScript.CanSprint())
 		{
 			playerScript.staminaScript.Sprint();
+
+			camera.Fov = 80;
 
 			currentSpeedModifier *= sprintSpeedModifier;
 

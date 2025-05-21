@@ -12,9 +12,9 @@
 script = ExtResource("3_qltr2")
 
 [node name="Gautcher" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_jfw7m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28841, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.31157, 1.28841, 9.24683)
 player = NodePath("../Player")
-spotDistance = 5.0
+spotDistance = 10.0
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(-13.8271, 0, 0, 0, 0.0665016, 0, 0, 0, -13.8271, 0, 0, 0)
@@ -39,7 +39,6 @@ use_collision = true
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.89815, 0.285526, 0.334367, -0.439688, 0.583242, 0.68301, 0, -0.760463, 0.649382, 0, 2.5226, 0)
 shadow_enabled = true
-sky_mode = 1
 
 [node name="EdgeWall1" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 28.5431, 13.7917, 1.62946, 0)

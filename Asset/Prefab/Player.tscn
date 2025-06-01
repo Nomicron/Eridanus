@@ -54,4 +54,7 @@ camera = NodePath("../../Head/Camera3D")
 
 [node name="Stamina" type="Node" parent="Script" node_paths=PackedStringArray("vignette")]
 script = ExtResource("3_j32r5")
+sprintDepletion = 0.15
+jumpDepletion = 22.5
+staminaReplenishment = 5.0
 vignette = NodePath("../../Head/CanvasLayer/TextureRect")
